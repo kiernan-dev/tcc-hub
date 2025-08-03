@@ -107,14 +107,76 @@
             background-color: var(--dark-gray);
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
+            border-bottom: 1px solid var(--harley-orange);
         }
 
         .navbar.scrolled {
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
+        /* Mobile Menu Styles */
+        .mobile-menu-button {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .mobile-menu-button span {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .mobile-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: var(--dark-gray);
+            border-bottom: 1px solid var(--harley-orange);
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 40;
+        }
+
+        .mobile-menu.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 16px 24px;
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: background-color 0.2s ease;
+        }
+
+        .mobile-menu a:hover {
+            background-color: rgba(255, 69, 0, 0.1);
+            color: var(--harley-orange);
+        }
+
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-button {
+                display: flex;
+            }
+            
+            .desktop-menu {
+                display: none;
+            }
+        }
+
         .hero-section {
-            background: linear-gradient(135deg, var(--light-bg) 0%, #e9ecef 100%);
             position: relative;
             overflow: hidden;
         }
@@ -172,12 +234,12 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar fixed w-full top-0 z-50 px-6 py-4">
+    <nav class="navbar fixed w-full top-0 z-50 px-6 py-4 relative">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="cursor-pointer" id="tcc-logo">
                 <img src="hub-images/logo_tcc-primary.png" alt="Turkey Creek Cycles Logo" class="h-16 object-contain">
             </div>
-            <div class="hidden md:flex space-x-8 text-white">
+            <div class="desktop-menu hidden md:flex space-x-8 text-white">
                 <a href="#services" class="hover:text-harley-orange transition-colors">SERVICES</a>
                 <a href="#gallery" class="hover:text-harley-orange transition-colors">GALLERY</a>
                 <a href="#shop" class="hover:text-harley-orange transition-colors">SHOP</a>
@@ -185,13 +247,30 @@
                 <a href="#about" class="hover:text-harley-orange transition-colors">ABOUT</a>
                 <a href="#contact" class="btn-orange">CALL NOW</a>
             </div>
+            
+            <!-- Mobile menu button -->
+            <div class="mobile-menu-button" id="mobile-menu-button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <a href="#services">SERVICES</a>
+            <a href="#gallery">GALLERY</a>
+            <a href="#shop">SHOP</a>
+            <a href="#blog">BLOG</a>
+            <a href="#about">ABOUT</a>
+            <a href="#contact" class="btn-orange">CALL NOW</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-section min-h-screen flex items-center justify-center relative pt-20">
+    <section class="hero-section min-h-screen flex items-center justify-center relative" style="background-image: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.75)), url('hub-images/bkg-orange-goop.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
         <div class="max-w-6xl mx-auto text-center px-6">
-            <div class="container-dark p-12 scroll-animate">
+            <div class="container-dark p-12 scroll-animate visible">
                 <h1 class="text-6xl md:text-8xl font-black text-white mb-6">
                     WHERE <span class="text-harley-orange">LEGENDS</span> ARE BORN
                 </h1>
@@ -308,7 +387,7 @@
     </section>
 
     <!-- Gallery Section -->
-    <section id="gallery" class="py-20">
+    <section id="gallery" class="py-20" style="background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url('hub-images/bkg-vivid-sporty.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16 scroll-animate">
                 <h2 class="text-5xl font-black text-deep-black mb-6">OUR <span class="text-harley-orange">GALLERY</span></h2>
@@ -428,11 +507,11 @@
     </section>
 
     <!-- Blog Section -->
-    <section id="blog" class="py-20">
+    <section id="blog" class="py-20" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('hub-images/bkg-orange-goop.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16 scroll-animate">
-                <h2 class="text-5xl font-black text-deep-black mb-6">BUILDER'S <span class="text-harley-orange">BLOG</span></h2>
-                <p class="text-xl text-gray-600">Behind the scenes of our builds, technical insights, and stories from the Turkey Creek workshop.</p>
+                <h2 class="text-5xl font-black text-white mb-6">BUILDER'S <span class="text-harley-orange">BLOG</span></h2>
+                <p class="text-xl text-gray-300">Behind the scenes of our builds, technical insights, and stories from the Turkey Creek workshop.</p>
             </div>
 
             <div class="container-dark p-8 scroll-animate">
@@ -564,11 +643,11 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20">
+    <section id="contact" class="py-20" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('hub-images/bkg-dark-swirls.jpg'); background-size: cover; background-position: center; background-attachment: fixed;">
         <div class="max-w-6xl mx-auto px-6">
             <div class="text-center mb-16 scroll-animate">
-                <h2 class="text-5xl font-black text-deep-black mb-6">GET IN <span class="text-harley-orange">TOUCH</span></h2>
-                <p class="text-xl text-gray-600">Ready to bring your custom V-Twin vision to life? Let's start building something legendary together.</p>
+                <h2 class="text-5xl font-black text-white mb-6">GET IN <span class="text-harley-orange">TOUCH</span></h2>
+                <p class="text-xl text-gray-300">Ready to bring your custom V-Twin vision to life? Let's start building something legendary together.</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-12">
@@ -667,7 +746,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="container-dark mx-6 mb-6 p-8 text-center">
+    <footer class="navbar w-full px-6 py-8 text-center">
         <div class="max-w-6xl mx-auto">
             <h3 class="text-2xl font-bold text-white mb-4">TURKEY CREEK CYCLES</h3>
             <p class="text-gray-300 mb-4">Custom V-Twin Specialists | Basehor, Kansas</p>
@@ -703,6 +782,19 @@
             } else {
                 navbar.classList.remove('scrolled');
             }
+        });
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('show');
+        });
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.remove('show');
+            });
         });
 
         // Parallax effect
