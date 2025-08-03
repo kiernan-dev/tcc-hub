@@ -503,9 +503,9 @@
                 reactAppsContainer.innerHTML = 
                     createCard({
                         title: 'React App - Forged',
-                        description: 'Industrial-themed showcase featuring dynamic video hero backgrounds and rugged design aesthetics.',
+                        description: 'Industrial-themed showcase featuring dynamic video background and rugged design aesthetics.',
                         icon: 'fas fa-code',
-                        tags: ['Industrial', 'Video Hero', 'Dynamic'],
+                        tags: ['Industrial', 'Background Video', 'Dynamic'],
                         onClick: "openPage('https://kiernan-dev.github.io/tcc-react-forged/')",
                         extraClasses: 'opacity-50 cursor-not-allowed',
                         animationDelay: '1'
@@ -578,6 +578,11 @@
             const videoContentContainer = document.getElementById('video-content-container');
             if (videoContentContainer) {
                 videoContentContainer.innerHTML = 
+                    '<div class="col-span-full mb-8">' +
+                        '<h3 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">' +
+                            '<i class="fas fa-video text-orange-500 mr-3"></i>Featured Content' +
+                        '</h3>' +
+                    '</div>' +
                     createCard({
                         title: 'TCC Commercial',
                         description: 'Professional commercial showcasing Turkey Creek Cycles\' craftsmanship and heritage.',
@@ -591,7 +596,7 @@
                         description: 'Watch a custom V-twin build from start to finish in this engaging timelapse.',
                         icon: 'fas fa-clock',
                         tags: ['Timelapse', 'Custom Build'],
-                        onClick: "openVideoModal('_RnD/TCC-interviews/Gflow_tcc_clip_1.mp4', 'Build Timelapse')",
+                        onClick: "openVideoModal('vids/chasis-timelapse-1.mp4', 'Build Timelapse')",
                         animationDelay: '2'
                     }) +
                     createCard({
@@ -599,8 +604,70 @@
                         description: 'Behind-the-scenes tour of the Turkey Creek Cycles fabrication facility.',
                         icon: 'fas fa-route',
                         tags: ['Tour', 'Behind-the-Scenes'],
-                        onClick: "openVideoModal('_RnD/TCC-interviews/Gflow_tcc_clip_3.mp4', 'Shop Tour')",
+                        onClick: "openVideoModal('vids/tcc-shop-walkthru.mp4', 'Shop Tour')",
                         animationDelay: '3'
+                    }) +
+                    '<div class="col-span-full mb-8 mt-12">' +
+                        '<h3 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">' +
+                            '<i class="fas fa-laugh text-orange-500 mr-3"></i>Blooper Reels' +
+                        '</h3>' +
+                        '<p class="text-gray-600 mb-6">Behind-the-scenes bloopers and outtakes from our video shoots - the fun stuff that didn\'t make the final cut!</p>' +
+                    '</div>' +
+                    createCard({
+                        title: 'Gflow TCC Clip',
+                        description: 'Outtakes and funny moments from our GFlow TCC video shoot.',
+                        icon: 'fas fa-laugh-squint',
+                        tags: ['Bloopers', 'Behind-the-Scenes'],
+                        onClick: "openVideoModal('vids/bloopers/Gflow_tcc_clip_4.mp4', 'Gflow TCC Clip - Bloopers')",
+                        animationDelay: '4'
+                    }) +
+                    createCard({
+                        title: 'Timelapse Bloopers #1',
+                        description: 'Funny moments and mistakes from our chassis timelapse filming.',
+                        icon: 'fas fa-laugh-squint',
+                        tags: ['Bloopers', 'Timelapse'],
+                        onClick: "openVideoModal('vids/bloopers/chasis-timelapse-3.mp4', 'Timelapse Bloopers #1')",
+                        animationDelay: '5'
+                    }) +
+                    createCard({
+                        title: 'Timelapse Bloopers #2',
+                        description: 'More hilarious outtakes from our build timelapse sessions.',
+                        icon: 'fas fa-laugh-squint',
+                        tags: ['Bloopers', 'Timelapse'],
+                        onClick: "openVideoModal('vids/bloopers/chasis-timelapse-4.mp4', 'Timelapse Bloopers #2')",
+                        animationDelay: '6'
+                    }) +
+                    createCard({
+                        title: 'Workshop Bloopers #1',
+                        description: 'Candid moments and funny mishaps from around the shop.',
+                        icon: 'fas fa-laugh-squint',
+                        tags: ['Bloopers', 'Workshop'],
+                        onClick: "openVideoModal('vids/bloopers/video-1749337164638.mp4', 'Workshop Bloopers #1')",
+                        animationDelay: '7'
+                    }) +
+                    createCard({
+                        title: 'Workshop Bloopers #2',
+                        description: 'More entertaining moments from our daily shop operations.',
+                        icon: 'fas fa-laugh-squint',
+                        tags: ['Bloopers', 'Workshop'],
+                        onClick: "openVideoModal('vids/bloopers/video-1749337189859.mp4', 'Workshop Bloopers #2')",
+                        animationDelay: '8'
+                    }) +
+                    createCard({
+                        title: 'Workshop Bloopers #3',
+                        description: 'Even more laughs and unscripted moments from the Turkey Creek team.',
+                        icon: 'fas fa-laugh-squint',
+                        tags: ['Bloopers', 'Workshop'],
+                        onClick: "openVideoModal('vids/bloopers/video-1749337196982.mp4', 'Workshop Bloopers #3')",
+                        animationDelay: '9'
+                    }) +
+                    createCard({
+                        title: 'Workshop Bloopers #4',
+                        description: 'The final collection of our funniest workshop moments and outtakes.',
+                        icon: 'fas fa-laugh-squint',
+                        tags: ['Bloopers', 'Workshop'],
+                        onClick: "openVideoModal('vids/bloopers/video-1749337199206.mp4', 'Workshop Bloopers #4')",
+                        animationDelay: '10'
                     });
             }
 
