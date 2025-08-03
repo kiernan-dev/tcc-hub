@@ -97,7 +97,8 @@
         .section-divider {
             height: 4px;
             background: linear-gradient(90deg, #FF6B35 0%, #FF8E53 50%, #FF6B35 100%);
-            margin: 0 auto;
+            margin-left: auto;
+            margin-right: auto;
             width: 100px;
         }
         
@@ -151,19 +152,374 @@
         .content-block:hover::after {
             transform: scaleX(1);
         }
+        /* Chat Interface Styles */
+        .chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .chat-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6f00 0%, #ff9f55 100%);
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(255, 111, 0, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(255, 111, 0, 0.4);
+        }
+
+        .chat-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 380px;
+            height: 500px;
+            background: #f1f3f4;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            transform: translateY(100%) scale(0.8);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            overflow: hidden;
+            border: 1px solid rgba(255, 111, 0, 0.1);
+        }
+
+        .chat-window.active {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #ff6f00 0%, #ff9f55 100%);
+            padding: 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chat-header h3 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .chat-header .status {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .chat-messages {
+            height: 340px;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f1f3f4;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .chat-messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #ff6f00;
+            border-radius: 2px;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            animation: slideInMessage 0.3s ease;
+        }
+
+        .message.bot {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .message.user {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .message-content {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .message.bot .message-content {
+            background: white;
+            color: #333;
+            border-bottom-left-radius: 8px;
+            margin-left: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .message.user .message-content {
+            background: linear-gradient(135deg, #ff6f00 0%, #ff9f55 100%);
+            color: white;
+            border-bottom-right-radius: 8px;
+        }
+
+        .bot-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6f00 0%, #ff9f55 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .chat-input-area {
+            padding: 15px 20px;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #e5e7eb;
+            border-radius: 25px;
+            outline: none;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .chat-input:focus {
+            border-color: #ff6f00;
+            box-shadow: 0 0 0 3px rgba(255, 111, 0, 0.1);
+        }
+
+        .send-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6f00 0%, #ff9f55 100%);
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+
+        .send-button:hover {
+            transform: scale(1.05);
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 12px 16px;
+            background: white;
+            border-radius: 18px;
+            border-bottom-left-radius: 8px;
+            margin-left: 42px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ff6f00;
+            animation: typingAnimation 1.5s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typingAnimation {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.4;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInMessage {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .quick-action {
+            padding: 6px 12px;
+            background: rgba(255, 111, 0, 0.1);
+            border: 1px solid rgba(255, 111, 0, 0.2);
+            border-radius: 15px;
+            font-size: 12px;
+            color: #ff6f00;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .quick-action:hover {
+            background: rgba(255, 111, 0, 0.2);
+            transform: translateY(-1px);
+        }
+
+        /* Hero Background Images */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+            z-index: 1;
+        }
+
+        .hero-bg.active {
+            opacity: 0.4;
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(245, 245, 245, 0.4) 0%, rgba(240, 240, 240, 0.7) 50%, rgba(235, 235, 235, 0.5) 100%);
+            z-index: 2;
+        }
+
+        /* Mobile Menu Styles */
+        #mobile-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            z-index: 40;
+        }
+
+        #mobile-menu.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        #mobile-menu a {
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
+        #mobile-menu a:hover {
+            background: rgba(255, 111, 0, 0.05);
+            padding-left: 8px;
+        }
+
+        #mobile-menu a:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: #ff6f00;
+            transform: scaleY(0);
+            transition: transform 0.2s ease;
+        }
+
+        #mobile-menu a:hover:before {
+            transform: scaleY(1);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .chat-window {
+                width: calc(100vw - 40px);
+                right: -10px;
+                bottom: 70px;
+            }
+            
+            .chat-widget {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-100 text-gray-900">
     <div class="scroll-progress"></div>
     
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 nav-blur border-b border-gray-200">
+    <nav class="fixed top-0 w-full z-50 nav-blur border-b border-gray-200 relative">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <div class="text-3xl font-black text-gray-900">
-                    <img src="hub-images/logo_tcc-primary.png" alt="TCC Logo" class="h-12 cursor-pointer" id="tcc-logo">
+                    <img src="hub-images/logo_tcc-primary.png" alt="TCC Logo" class="h-20 cursor-pointer" id="tcc-logo">
                 </div>
-                <div class="hidden md:flex space-x-8">
+                <div class="hidden md:flex items-center space-x-8">
                     <a href="#services" class="text-gray-700 hover:text-orange-500 font-medium transition duration-300">SERVICES</a>
                     <a href="#gallery" class="text-gray-700 hover:text-orange-500 font-medium transition duration-300">GALLERY</a>
                     <a href="#shop" class="text-gray-700 hover:text-orange-500 font-medium transition duration-300">SHOP</a>
@@ -171,22 +527,50 @@
                     <a href="#about" class="text-gray-700 hover:text-orange-500 font-medium transition duration-300">ABOUT</a>
                     <a href="#contact" class="orange-gradient text-white px-6 py-2 rounded font-bold hover:shadow-lg transition duration-300">CONTACT</a>
                 </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-orange-500 focus:outline-none focus:text-orange-500">
+                        <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                            <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden bg-white border-t border-gray-200">
+            <div class="px-6 py-4 space-y-4">
+                <a href="#services" class="block text-gray-700 hover:text-orange-500 font-medium transition duration-300">SERVICES</a>
+                <a href="#gallery" class="block text-gray-700 hover:text-orange-500 font-medium transition duration-300">GALLERY</a>
+                <a href="#shop" class="block text-gray-700 hover:text-orange-500 font-medium transition duration-300">SHOP</a>
+                <a href="#blog" class="block text-gray-700 hover:text-orange-500 font-medium transition duration-300">BLOG</a>
+                <a href="#about" class="block text-gray-700 hover:text-orange-500 font-medium transition duration-300">ABOUT</a>
+                <a href="#contact" class="orange-gradient text-white px-6 py-2 rounded font-bold hover:shadow-lg transition duration-300 inline-block">CONTACT</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="min-h-screen flex items-center immersive-section relative pt-20">
+    <section class="min-h-screen flex items-center immersive-section relative overflow-hidden">
+        <!-- Background Images -->
+        <div class="hero-bg active" style="background-image: url('https://images.squarespace-cdn.com/content/v1/58928af6bf629adabaeae969/1687359553750-C8A75KK4WQ6HVIS3ZQH5/ADRENALINE+-+2022+FLTRX+ROAD+GLIDE+-92.jpg');"></div>
+        <div class="hero-bg" style="background-image: url('https://images.squarespace-cdn.com/content/v1/58928af6bf629adabaeae969/1721238239098-TUSL27DKLMEG7066PFWQ/2021+ROAD+KING+-+HYBRID+THEORY+3.0+-32.jpg');"></div>
+        <div class="hero-bg" style="background-image: url('https://www.thunderbike.com/wp-content/uploads/2024/04/phantom-king-beitragsbild.jpg');"></div>
+        <div class="hero-bg" style="background-image: url('https://ultimatemotorcycling.com/wp-content/uploads/2022/08/Harley-Davidson-Apex-Factory-Custom-Paint-First-Look-road-king-street-glide-road-glide-ultra-limited-4.jpg');"></div>
+        <div class="hero-bg" style="background-image: url('https://images.squarespace-cdn.com/content/v1/58928af6bf629adabaeae969/1691861270859-XFCSG9X4LQPUXCVMCT9K/IMG_6025.jpg');"></div>
+        
         <div class="container mx-auto px-6 z-10">
-            <div class="text-center scroll-fade">
-                <h1 class="text-6xl md:text-8xl font-black mb-6 leading-tight">
+            <div class="text-center scroll-fade visible">
+                <h1 class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black mb-6 leading-tight">
                     <span class="hero-text">WHERE</span><br>
                     <span class="text-orange-500 floating-element inline-block">LEGENDS</span><br>
                     <span class="hero-text">ARE BORN</span>
                 </h1>
                 <div class="section-divider mb-8"></div>
-                <p class="text-xl md:text-2xl text-gray-600 mb-4 font-medium">Custom V-Twin Specialists Since 2008</p>
-                <p class="text-lg text-gray-500 max-w-3xl mx-auto mb-12">
+                <p class="text-lg sm:text-xl md:text-2xl text-gray-600 mb-4 font-medium">Custom V-Twin Specialists Since 2008</p>
+                <p class="text-base sm:text-lg text-gray-500 max-w-3xl mx-auto mb-12">
                     From ground-up custom builds to precision fabrication, we craft V-Twin masterpieces that carry your spirit down every mile of road ahead.
                 </p>
                 <div class="flex flex-col md:flex-row gap-6 justify-center mb-32">
@@ -663,6 +1047,18 @@
             });
         });
 
+        // Hero image rotation
+        let currentImageIndex = 0;
+        const heroImages = document.querySelectorAll('.hero-bg');
+        
+        function rotateHeroImages() {
+            heroImages[currentImageIndex].classList.remove('active');
+            currentImageIndex = (currentImageIndex + 1) % heroImages.length;
+            heroImages[currentImageIndex].classList.add('active');
+        }
+        
+        setInterval(rotateHeroImages, 4000);
+
         // TCC Logo click to scroll to top
         document.getElementById('tcc-logo').addEventListener('click', function() {
             window.scrollTo({
@@ -670,6 +1066,198 @@
                 behavior: 'smooth'
             });
         });
+
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('show');
+        });
+
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.remove('show');
+            });
+        });
+
+        // Chat functionality
+        let chatOpen = false;
+
+        function toggleChat() {
+            const chatWindow = document.getElementById('chatWindow');
+            chatOpen = !chatOpen;
+            
+            if (chatOpen) {
+                chatWindow.classList.add('active');
+                document.getElementById('chatInput').focus();
+            } else {
+                chatWindow.classList.remove('active');
+            }
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage(message, 'user');
+                input.value = '';
+                
+                // Show typing indicator
+                showTypingIndicator();
+                
+                // Generate bot response
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    generateBotResponse(message);
+                }, 1500 + Math.random() * 1000);
+            }
+        }
+
+        function sendQuickMessage(message) {
+            addMessage(message, 'user');
+            showTypingIndicator();
+            
+            setTimeout(() => {
+                hideTypingIndicator();
+                generateBotResponse(message);
+            }, 1500 + Math.random() * 1000);
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        function addMessage(content, type) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${type}`;
+            
+            if (type === 'bot') {
+                messageDiv.innerHTML = `
+                    <div class="bot-avatar">🔧</div>
+                    <div class="message-content">${content}</div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="message-content">${content}</div>
+                `;
+            }
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            document.getElementById('typingIndicator').style.display = 'block';
+            const messagesContainer = document.getElementById('chatMessages');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            document.getElementById('typingIndicator').style.display = 'none';
+        }
+
+        function generateBotResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+            let response = '';
+
+            // V-twin jokes
+            const vTwinJokes = [
+                "Why did the V-twin break up with the inline-four? Because it wanted more character and less conformity! 🇺🇸",
+                "What did the Harley say to the sport bike? 'You might be faster, but I've got soul and the sound of freedom!' 🏍️",
+                "Why don't V-twins ever get lost? Because they always know which way is LOUD! 🔊",
+                "What's the difference between a V-twin and a sewing machine? The sewing machine only sounds like freedom when it's broken! 😄",
+                "Why did the custom V-twin go to therapy? It had too many issues with its twin! But hey, that's what makes it unique! 🔧"
+            ];
+
+            // Appointment scheduling responses
+            if (lowerMessage.includes('appointment') || lowerMessage.includes('schedule')) {
+                response = "I'd love to get you scheduled! Our fabrication wizards are usually booked out 2-3 weeks for custom work. What kind of build are you thinking? A full custom frame, engine work, or just some freedom-enhancing modifications? You can call us at (555) 123-4567 or I can have someone reach out to you. What works better? 📅🔧";
+            }
+            // Custom build quotes
+            else if (lowerMessage.includes('quote') || lowerMessage.includes('price') || lowerMessage.includes('cost')) {
+                response = "Ah, talking numbers! I love it. Custom V-twin work ranges from $5,000 for basic modifications up to $50,000+ for full custom builds that'll make eagles weep with patriotic pride. What's your vision? Frame work, engine mods, paint, or the whole freedom package? The more details you give me, the better I can point you toward your dream machine! 💰🇺🇸";
+            }
+            // V-twin technical talk
+            else if (lowerMessage.includes('v-twin') || lowerMessage.includes('engine') || lowerMessage.includes('harley')) {
+                response = "Now we're talking my language! V-twins are the heartbeat of American freedom. Whether it's a 45-degree Harley setup or a 90-degree chopper motor, these engines have CHARACTER. Need advice on cams, compression ratios, or just want to chat about that sweet, sweet exhaust note? I'm all ears! What's your current setup looking like? 🔥🏍️";
+            }
+            // Fabrication questions
+            else if (lowerMessage.includes('fabrication') || lowerMessage.includes('custom') || lowerMessage.includes('weld')) {
+                response = "Brother, you've hit the sweet spot! Our fabrication game is stronger than a cup of black coffee on a Monday morning. We do everything from scratch-built frames to one-off gas tanks that'll make your neighbors jealous. What kind of fabrication work are you dreaming about? And remember - we don't fix, we CREATE! ⚡🔧";
+            }
+            // Joke requests
+            else if (lowerMessage.includes('joke') || lowerMessage.includes('funny')) {
+                response = vTwinJokes[Math.floor(Math.random() * vTwinJokes.length)];
+            }
+            // General greetings
+            else if (lowerMessage.includes('hi') || lowerMessage.includes('hello') || lowerMessage.includes('hey')) {
+                response = "Well hey there, freedom rider! Welcome to Turkey Creek Cycles, where dreams become steel and ordinary becomes extraordinary! What brings you to our corner of V-twin paradise today? 🇺🇸🏍️";
+            }
+            // Default response
+            else {
+                const responses = [
+                    "That's a great question! I'm here to help with anything TCC-related. Whether it's scheduling, custom builds, V-twin talk, or just shooting the breeze about motorcycles and freedom, I'm your guy! What specifically can I help you with? 🔧🇺🇸",
+                    "You know what they say - when in doubt, add more chrome and make it louder! But seriously, I'm here to help with all your Turkey Creek Cycles needs. Appointments, quotes, technical questions, or dad jokes - what's on your mind? 😄🏍️",
+                    "Every great build starts with a question! I'm here to help you figure out your next steps toward V-twin greatness. What's got you curious about custom fabrication today? 🔥⚡"
+                ];
+                response = responses[Math.floor(Math.random() * responses.length)];
+            }
+
+            addMessage(response, 'bot');
+        }
     </script>
+
+    <!-- AI Chat Widget -->
+    <div class="chat-widget">
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <div>
+                    <h3>🔧 Wrench - TCC Assistant</h3>
+                    <div class="status">🇺🇸 Online • Ready to talk V-twin!</div>
+                </div>
+                <button onclick="toggleChat()" style="background: none; border: none; color: white; cursor: pointer;">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot">
+                    <div class="bot-avatar">🔧</div>
+                    <div class="message-content">
+                        Hey there, fellow freedom rider! I'm Wrench, your AI assistant here at Turkey Creek Cycles. Whether you need to schedule an appointment, talk shop about custom fabrication, or just hear a good V-twin dad joke, I'm your guy! How can I help you today?
+                        <div class="quick-actions">
+                            <div class="quick-action" onclick="sendQuickMessage('Schedule appointment')">📅 Schedule Appointment</div>
+                            <div class="quick-action" onclick="sendQuickMessage('Custom build quote')">💰 Get Quote</div>
+                            <div class="quick-action" onclick="sendQuickMessage('Tell me a V-twin joke')">😄 Tell Me a Joke</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            </div>
+            
+            <div class="chat-input-area">
+                <input type="text" class="chat-input" id="chatInput" placeholder="Type your message..." onkeypress="handleKeyPress(event)">
+                <button class="send-button" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        
+        <button class="chat-button" onclick="toggleChat()">
+            <i class="fas fa-comments"></i>
+        </button>
+    </div>
+
 </body>
 </html>
