@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turkey Creek Cycles - Document Hub</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="overlay-fix.css">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        html {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f1f3f4 0%, #fff5f0 50%, #ffe8d6 100%);
+            min-height: 100vh;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            z-index: 0;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .gradient-orange {
+            background: linear-gradient(135deg, #ff6f00 0%, #ff9f55 100%);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #ff6f00 0%, #c05300 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(255, 111, 0, 0.15);
+        }
+        
+        .card-bg {
+            background: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative !important;
+            z-index: 1000 !important;
+        }
+        
+        .header-shadow {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .preview-icon {
+            background: linear-gradient(135deg, #ff6f00 0%, #ff9f55 100%);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 1rem;
+        }
+        
+        .preview-icon.mb-0 {
+            margin-bottom: 0;
+        }
+        
+        /* Mobile card improvements */
+        @media (max-width: 480px) {
+            .card-bg {
+                padding: 1rem !important;
+            }
+            
+            .preview-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 20px;
+                margin-bottom: 0.75rem;
+            }
+            
+            .card-bg .flex.gap-4 {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.75rem;
+            }
+            
+            .card-bg .flex-1 {
+                text-align: center;
+            }
+            
+            .card-bg h3 {
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .card-bg p {
+                font-size: 0.875rem;
+                margin-bottom: 0.75rem;
+            }
+            
+            .tag {
+                font-size: 0.75rem;
+                padding: 3px 8px;
+            }
+        }
+        
+        .tag {
+            background: rgba(255, 111, 0, 0.1);
+            color: #c05300;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; }
+        .delay-8 { animation-delay: 0.8s; }
+        
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent 0%, rgba(255, 111, 0, 0.3) 50%, transparent 100%);
+            margin: 4rem 0;
+        }
+        
+        .section-header {
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 111, 0, 0.1);
+        }
+        
+        .section-container {
+            margin-bottom: 5rem;
+            padding: 2rem 0;
+            scroll-margin-top: 100px;
+            background: linear-gradient(-45deg, 
+                rgba(230, 235, 240, 0.9), 
+                rgba(255, 111, 0, 0.08), 
+                rgba(255, 159, 85, 0.12), 
+                rgba(255, 204, 153, 0.15),
+                rgba(240, 245, 250, 0.8)
+            ) !important;
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            border-radius: 24px;
+            position: relative !important;
+            overflow: hidden;
+            border: 1px solid rgba(255, 111, 0, 0.1);
+            z-index: 500 !important;
+        }
+        
+        .section-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 111, 0, 0.06) 25%, 
+                rgba(255, 159, 85, 0.1) 50%, 
+                rgba(255, 111, 0, 0.06) 75%, 
+                transparent 100%
+            );
+            background-size: 200% 100%;
+            animation: shimmer 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        @keyframes shimmer {
+            0%, 100% {
+                background-position: -200% 0;
+                opacity: 0;
+            }
+            50% {
+                background-position: 200% 0;
+                opacity: 1;
+            }
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #ff6f00 0%, #ff9f55 100%);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            position: relative;
+            z-index: 999999;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f1f3f4 0%, #fff5f0 50%, #ffe8d6 100%);
+            min-height: 100vh;
+            position: relative;
+            z-index: 999998;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-white bg-opacity-90 backdrop-filter backdrop-blur-lg sticky top-0 z-50 header-shadow" style="z-index: 9999 !important;">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-20 h-20 flex items-center justify-center">
+                        <img src="hub-images/logo_tcc-primary.png" alt="Turkey Creek Cycles Logo" class="w-20 h-20 object-contain">
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">Turkey Creek Cycles</h1>
+                        <p class="text-sm text-gray-600">Document Hub</p>
+                    </div>
+                </div>
+                <!-- Mobile Menu Button -->
+                <button id="mobile-nav-toggle" class="md:hidden bg-gray-100 p-2 rounded-lg">
+                    <i class="fas fa-bars text-gray-700"></i>
+                </button>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#website-concepts" class="nav-link text-sm font-medium text-gray-700 hover:text-orange-600 transition-colors duration-200">Website Concepts</a>
+                    <a href="#videos" class="nav-link text-sm font-medium text-gray-700 hover:text-orange-600 transition-colors duration-200">Videos</a>
+                    <a href="#documents" class="nav-link text-sm font-medium text-gray-700 hover:text-orange-600 transition-colors duration-200">Documents</a>
+                    <div class="text-right section-container" style="margin: 10px 10px 10px 40px; padding: 10px 20px;">
+                        <p class="text-ms text-gradient" style="font-weight: bold;">Client Preview Portal</p>
+                        <p class="text-xs text-gradient">8 Design Concepts</p>
+                    </div>
+                </nav>
+            </div>
+            
+            <!-- Mobile Navigation Dropdown -->
+            <div id="mobile-nav-menu" class="hidden md:hidden border-t border-gray-200 bg-white/90 backdrop-blur-sm">
+                <div class="max-w-6xl mx-auto px-6 py-4">
+                    <div class="flex flex-col space-y-3">
+                        <a href="#website-concepts" class="mobile-nav-link text-gray-700 hover:text-orange-600 py-2 text-base font-medium border-b border-gray-100 last:border-b-0">Website Concepts</a>
+                        <a href="#videos" class="mobile-nav-link text-gray-700 hover:text-orange-600 py-2 text-base font-medium border-b border-gray-100 last:border-b-0">Videos</a>
+                        <a href="#documents" class="mobile-nav-link text-gray-700 hover:text-orange-600 py-2 text-base font-medium border-b border-gray-100 last:border-b-0">Documents</a>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-8 relative" style="z-index: 100 !important;">
+        <!-- Intro Section -->
+        <div class="text-center mb-8 fade-in-up">
+            <h2 class="text-4xl font-bold text-gradient mb-4">Turkey Creek Cycles Portfolio</h2>
+            <p class="text-gray-600 mx-auto text-sm">
+                This is your personal preview center for Turkey Creek Cycles. <br />
+                We've created 10 different website design concepts for your business - <br />each one shows you how a complete website would look and feel for your customers. <br />
+                These are interactive previews that demonstrate the visual style, layout, and overall experience. <br />
+                We've also included videos and project documents. <br />
+                Click on any design below to explore it and see what appeals to you for Turkey Creek Cycles.
+            </p>
+        </div>
+
+        <!-- Section Divider -->
+        <div class="section-divider" style="margin: 2rem 0;"></div>
+    
+        <!-- Instructions -->
+        <div class="mb-4 text-center">
+            <div class="max-w-4xl mx-auto bg-gray-50 border border-gray-200 rounded p-3">
+                <h3 class="font-semibold text-gray-800 mb-2 flex items-center justify-center">
+                    <i class="fas fa-info-circle text-gradient mr-2"></i>
+                    How to Use This Hub
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-gray-600">
+                    <div class="text-center">
+                        <strong class="text-orange-600">Website Concepts:</strong> <br />
+                        Click cards to view sites in a new tab
+                    </div>
+                    <div class="text-center">
+                        <strong class="text-orange-600">Videos:</strong> <br />
+                        Click cards to open modal video player
+                    </div>
+                    <div class="text-center">
+                        <strong class="text-orange-600">Compare:</strong> <br />
+                        Switch between the multiple designs to compare
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WEBSITE CONCEPTS Section -->
+        <div id="website-concepts" class="section-container">
+            <div class="section-header">
+                <div class="flex items-center mb-4">
+                    <div class="w-2 h-16 gradient-orange rounded-full mr-6"></div>
+                    <h2 class="text-4xl font-bold text-gray-900 uppercase tracking-wider">Website Concepts</h2>
+                </div>
+                <p class="text-gray-600 text-md leading-relaxed px-8">Each design shows a different style and approach - from bold and edgy to clean and professional. Click on any design to see how it would look and navigate for your customers. These interactive previews give you a feel for the complete website experience without being fully functional sites.</p>
+            </div>
+            
+            <!-- React Web Apps Sub-section -->
+            <div class="px-8 mb-12">
+                <div class="flex items-center mb-6">
+                    <div class="w-1 h-8 bg-gradient-to-b from-orange-500 to-orange-600 rounded-full mr-4"></div>
+                    <h3 class="text-2xl font-bold text-gray-800 uppercase tracking-wide">React Web Apps</h3>
+                </div>
+                <div id="react-apps-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Cards will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Static HTML Design Concepts Sub-section -->
+            <div class="px-8 mb-12">
+                <div class="flex items-center mb-6">
+                    <div class="w-1 h-8 bg-gradient-to-b from-orange-500 to-orange-600 rounded-full mr-4"></div>
+                    <h3 class="text-2xl font-bold text-gray-800 uppercase tracking-wide">Static HTML Design Concepts</h3>
+                </div>
+                <div id="static-sites-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Cards will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- E-commerce & Blog Concepts Sub-section -->
+            <div class="px-8">
+                <div class="flex items-center mb-6">
+                    <div class="w-1 h-8 bg-gradient-to-b from-orange-500 to-orange-600 rounded-full mr-4"></div>
+                    <h3 class="text-2xl font-bold text-gray-800 uppercase tracking-wide">E-commerce & Blog Concepts</h3>
+                </div>
+                <div id="special-pages-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Cards will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+        </div>
+    
+        <!-- Section Divider -->
+        <div class="section-divider"></div>
+            
+        <!-- VIDEOS Section -->
+        <div id="videos" class="section-container">
+            <div class="section-header">
+                <div class="flex items-center mb-4">
+                    <div class="w-2 h-16 gradient-orange rounded-full mr-6"></div>
+                    <h2 class="text-4xl font-bold text-gray-900 uppercase tracking-wider">Videos</h2>
+                </div>
+                <p class="text-gray-600 text-xl leading-relaxed px-8">Commercial footage, build timelapses, and behind-the-scenes content from Turkey Creek Cycles.</p>
+            </div>
+            
+            <!-- Videos Grid -->
+            <div id="video-content-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8">
+                <!-- Cards will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Section Divider -->
+        <div class="section-divider"></div>
+
+        <!-- DOCUMENTS Section -->
+        <div id="documents" class="section-container">
+            <div class="section-header">
+                <div class="flex items-center mb-4">
+                    <div class="w-2 h-16 gradient-orange rounded-full mr-6"></div>
+                    <h2 class="text-4xl font-bold text-gray-900 uppercase tracking-wider">Documents</h2>
+                </div>
+                <p class="text-gray-600 text-xl leading-relaxed px-8">Brand guidelines, specifications, and project documentation for Turkey Creek Cycles.</p>
+            </div>
+            
+            <!-- Documents Grid -->
+            <div id="documents-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-8">
+                <!-- Cards will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Section Divider -->
+        <div class="section-divider" style="margin-bottom: 0;"></div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white bg-opacity-60 backdrop-filter backdrop-blur-lg">
+        <div class="max-w-7xl mx-auto px-6 py-8">
+            <div class="text-center">
+                <div class="w-24 h-24 flex items-center justify-center mx-auto mb-4">
+                    <img src="hub-images/logo_tcc-primary.png" alt="Turkey Creek Cycles Logo" class="w-24 h-24 object-contain">
+                </div>
+                <h4 class="text-lg font-semibold text-gray-900 mb-2">Turkey Creek Cycles</h4>
+                <p class="text-gray-600 text-sm">Premium Custom V-Twin Fabrication</p>
+                <div class="mt-4 text-xs text-gray-500">
+                    Document Hub • Client Preview Portal
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Video Modal -->
+    <div id="videoModal" style="display: none;">
+        <div class="relative max-w-4xl w-full max-h-full">
+            <!-- Close Button -->
+            <button onclick="closeVideoModal()" class="absolute -top-10 right-0 text-white hover:text-orange-500 transition-colors z-10">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            
+            <!-- Video Container -->
+            <div class="bg-black rounded-lg overflow-hidden">
+                <div class="bg-gradient-orange px-6 py-4">
+                    <h3 id="videoTitle" class="text-white text-xl font-semibold"></h3>
+                </div>
+                <div class="relative">
+                    <video id="modalVideo" controls class="w-full h-auto max-h-96" preload="metadata">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Reusable card component function
+        function createCard(config) {
+            const {
+                title,
+                description,
+                icon,
+                iconStyle = '',
+                tags = [],
+                onClick = '',
+                extraClasses = '',
+                animationDelay = ''
+            } = config;
+            
+            const tagsHtml = tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+            const clickHandler = onClick ? `onclick="${onClick}"` : '';
+            const delayClass = animationDelay ? `delay-${animationDelay}` : '';
+            
+            return `
+                <div class="card-bg rounded-xl p-6 card-hover fade-in-up ${delayClass} ${extraClasses}" ${clickHandler}>
+                    <div class="flex gap-4">
+                        <div class="preview-icon mb-0 flex-shrink-0">
+                            <i class="${icon}" ${iconStyle ? `style="${iconStyle}"` : ''}></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">${title}</h3>
+                            <p class="text-gray-600 text-sm mb-3">${description}</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        ${tagsHtml}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Function to populate card containers
+        function populateCards() {
+            // React Apps
+            const reactAppsContainer = document.getElementById('react-apps-container');
+            if (reactAppsContainer) {
+                reactAppsContainer.innerHTML = 
+                    createCard({
+                        title: 'React App - Forge',
+                        description: 'Industrial-themed showcase featuring dynamic video hero backgrounds and rugged design aesthetics.',
+                        icon: 'fas fa-code',
+                        tags: ['Industrial', 'Video Hero', 'Dynamic'],
+                        onClick: "openPage('https://kiernan-dev.github.io/turkeycreek/react-app-forge-deploy')",
+                        extraClasses: 'opacity-50 cursor-not-allowed',
+                        animationDelay: '1'
+                    }) +
+                    createCard({
+                        title: 'React App - Legend',
+                        description: 'Clean, professional interface with interactive chatbot experience and streamlined user engagement.',
+                        icon: 'fas fa-react',
+                        iconStyle: 'color: #61dafb;',
+                        tags: ['Professional', 'Chatbot', 'Clean UI'],
+                        onClick: "openPage('https://kiernan-dev.github.io/turkeycreek/react-app-legend-deploy')",
+                        extraClasses: 'opacity-50 cursor-not-allowed',
+                        animationDelay: '2'
+                    });
+            }
+
+            // Static Sites
+            const staticSitesContainer = document.getElementById('static-sites-container');
+            if (staticSitesContainer) {
+                staticSitesContainer.innerHTML = 
+                    createCard({
+                        title: 'California Brutalist',
+                        description: 'Bold, architectural design with strong geometric elements and modern typography.',
+                        icon: 'fas fa-building',
+                        tags: ['Modern', 'Bold', 'E-commerce', 'Blog'],
+                        onClick: "openPage('tcc-cali-brutalist.html')",
+                        animationDelay: '1'
+                    }) +
+                    createCard({
+                        title: 'California Sunset',
+                        description: 'Warm, inviting design inspired by California sunsets with orange gradients.',
+                        icon: 'fas fa-sun',
+                        tags: ['Warm', 'Elegant', 'E-commerce', 'Blog', 'Chatbot'],
+                        onClick: "openPage('tcc-cali-sunset.html')",
+                        animationDelay: '2'
+                    }) +
+                    createCard({
+                        title: 'Impactful',
+                        description: 'High-impact design with strong visual hierarchy and dynamic layouts.',
+                        icon: 'fas fa-bolt',
+                        tags: ['Dynamic', 'Powerful'],
+                        onClick: "openPage('tcc-impactful.html')",
+                        animationDelay: '4'
+                    }) +
+                    createCard({
+                        title: 'Moto Craft',
+                        description: 'Craftsman-focused design highlighting custom fabrication and expertise.',
+                        icon: 'fas fa-wrench',
+                        tags: ['Crafted', 'Professional'],
+                        onClick: "openPage('tcc-moto-craft.html')",
+                        animationDelay: '5'
+                    }) +
+                    createCard({
+                        title: 'Rev Master',
+                        description: 'Performance-oriented design with racing aesthetics and speed elements.',
+                        icon: 'fas fa-tachometer-alt',
+                        tags: ['Performance', 'Racing'],
+                        onClick: "openPage('tcc-rev-master.html')",
+                        animationDelay: '6'
+                    });
+            }
+
+            // Special Pages
+            const specialPagesContainer = document.getElementById('special-pages-container');
+            if (specialPagesContainer) {
+                specialPagesContainer.innerHTML = 
+                    createCard({
+                        title: 'Swag Shop',
+                        description: 'E-commerce focused design showcasing merchandise and branded products.',
+                        icon: 'fas fa-shopping-bag',
+                        tags: ['E-commerce', 'Retail'],
+                        onClick: "openPage('tcc-swag-shop.html')",
+                        animationDelay: '7'
+                    }) +
+                    createCard({
+                        title: 'V-Twin Blog',
+                        description: 'Content-focused design for sharing stories, builds, and motorcycle culture.',
+                        icon: 'fas fa-blog',
+                        tags: ['Content', 'Stories'],
+                        onClick: "openPage('tcc-vtwin-blog.html')",
+                        animationDelay: '8'
+                    });
+            }
+
+            // Video Content
+            const videoContentContainer = document.getElementById('video-content-container');
+            if (videoContentContainer) {
+                videoContentContainer.innerHTML = 
+                    createCard({
+                        title: 'TCC Commercial',
+                        description: 'Professional commercial showcasing Turkey Creek Cycles\' craftsmanship and heritage.',
+                        icon: 'fas fa-video',
+                        tags: ['Commercial', 'HD'],
+                        onClick: "openVideoModal('_RnD/cc_tcc-commercial/cc_tcc-commercial_optimized.mp4', 'TCC Commercial')",
+                        animationDelay: '1'
+                    }) +
+                    createCard({
+                        title: 'Build Timelapse',
+                        description: 'Watch a custom V-twin build from start to finish in this engaging timelapse.',
+                        icon: 'fas fa-clock',
+                        tags: ['Timelapse', 'Custom Build'],
+                        onClick: "openVideoModal('_RnD/TCC-interviews/Gflow_tcc_clip_1.mp4', 'Build Timelapse')",
+                        animationDelay: '2'
+                    }) +
+                    createCard({
+                        title: 'Shop Tour',
+                        description: 'Behind-the-scenes tour of the Turkey Creek Cycles fabrication facility.',
+                        icon: 'fas fa-route',
+                        tags: ['Tour', 'Behind-the-Scenes'],
+                        onClick: "openVideoModal('_RnD/TCC-interviews/Gflow_tcc_clip_3.mp4', 'Shop Tour')",
+                        animationDelay: '3'
+                    });
+            }
+
+            // Documents
+            const documentsContainer = document.getElementById('documents-container');
+            if (documentsContainer) {
+                documentsContainer.innerHTML = 
+                    createCard({
+                        title: 'Brand Guidelines',
+                        description: 'Complete brand identity guide including logos, colors, and typography standards.',
+                        icon: 'fas fa-palette',
+                        tags: ['Brand', 'PDF'],
+                        animationDelay: '1'
+                    }) +
+                    createCard({
+                        title: 'Technical Specifications',
+                        description: 'Detailed technical requirements and specifications for custom builds.',
+                        icon: 'fas fa-cogs',
+                        tags: ['Technical', 'Specs'],
+                        animationDelay: '2'
+                    }) +
+                    createCard({
+                        title: 'Project Brief',
+                        description: 'Comprehensive project overview, goals, and creative direction document.',
+                        icon: 'fas fa-file-alt',
+                        tags: ['Brief', 'Overview'],
+                        animationDelay: '3'
+                    });
+            }
+        }
+
+        // Mobile navigation toggle
+        function toggleMobileNav() {
+            const mobileMenu = document.getElementById('mobile-nav-menu');
+            const toggleButton = document.getElementById('mobile-nav-toggle');
+            const icon = toggleButton.querySelector('i');
+            
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                mobileMenu.classList.add('hidden');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            populateCards();
+            
+            // Add mobile nav toggle listener
+            const mobileToggle = document.getElementById('mobile-nav-toggle');
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', toggleMobileNav);
+            }
+            
+            // Close mobile menu when clicking nav links
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    setTimeout(() => {
+                        const mobileMenu = document.getElementById('mobile-nav-menu');
+                        const toggleButton = document.getElementById('mobile-nav-toggle');
+                        const icon = toggleButton.querySelector('i');
+                        
+                        mobileMenu.classList.add('hidden');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }, 100);
+                });
+            });
+        });
+
+        function openPage(filename) {
+            window.open(filename, '_blank');
+        }
+
+        // Video modal functions
+        window.openVideoModal = function(videoSrc, title) {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            const titleElement = document.getElementById('videoTitle');
+            
+            if (!modal || !video || !titleElement) {
+                console.error('Modal elements not found');
+                return;
+            }
+            
+            titleElement.textContent = title;
+            video.src = videoSrc;
+            
+            // Show modal - using !important only where needed to override conflicting CSS
+            modal.style.cssText = 'display: flex !important; position: fixed !important; top: 0; left: 0; width: 100%; height: 100%; z-index: 999999 !important; background-color: rgba(0, 0, 0, 0.8); align-items: center; justify-content: center; padding: 1rem;';
+            
+            document.body.style.overflow = 'hidden';
+        }
+
+        window.closeVideoModal = function() {
+            const modal = document.getElementById('videoModal');
+            const video = document.getElementById('modalVideo');
+            
+            if (video) {
+                video.pause();
+                video.src = '';
+            }
+            if (modal) {
+                modal.style.display = 'none';
+            }
+            document.body.style.overflow = 'auto';
+        }
+
+        // Initialize modal event listeners when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Close modal when clicking outside the video
+            const videoModal = document.getElementById('videoModal');
+            if (videoModal) {
+                videoModal.addEventListener('click', function(e) {
+                    if (e.target === this) {
+                        closeVideoModal();
+                    }
+                });
+            }
+
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeVideoModal();
+                }
+            });
+        });
+
+        // Enhanced smooth scroll with easing
+        function smoothScrollTo(targetId) {
+            const target = document.getElementById(targetId);
+            if (!target) return;
+            
+            const targetPosition = target.offsetTop - 80;
+            const startPosition = window.pageYOffset;
+            const distance = targetPosition - startPosition;
+            const duration = 800;
+            let start = null;
+            
+            // Easing function (ease-in-out-cubic)
+            function easeInOutCubic(t) {
+                return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+            }
+            
+            function animation(currentTime) {
+                if (start === null) start = currentTime;
+                const timeElapsed = currentTime - start;
+                const progress = Math.min(timeElapsed / duration, 1);
+                const ease = easeInOutCubic(progress);
+                
+                window.scrollTo(0, startPosition + distance * ease);
+                
+                if (timeElapsed < duration) {
+                    requestAnimationFrame(animation);
+                }
+            }
+            
+            requestAnimationFrame(animation);
+        }
+
+        // Global variables
+        let navLinks;
+
+        // Add navigation link functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+                    smoothScrollTo(targetId);
+                    
+                    // Update active state
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                });
+            });
+            
+            // Update active nav on scroll with fallback for top of page
+            const sections = document.querySelectorAll('.section-container');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sectionId = entry.target.id;
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${sectionId}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, {
+                threshold: 0.3,
+                rootMargin: '-100px 0px -50% 0px'
+            });
+            
+            sections.forEach(section => observer.observe(section));
+            
+        });
+
+        // Add subtle parallax effect on scroll (combined with nav activation)
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('header');
+            const firstSection = document.getElementById('website-concepts');
+            
+            // Header background effect
+            if (scrolled > 50) {
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
+            } else {
+                header.style.backgroundColor = 'rgba(255, 255, 255, 0.9)';
+            }
+            
+            // Navigation activation for top area (only if navLinks is defined)
+            if (navLinks && scrolled < 300) { // When near top of page
+                navLinks.forEach(link => link.classList.remove('active'));
+                if (navLinks[0]) navLinks[0].classList.add('active'); // Activate first nav item
+            } else if (navLinks && firstSection && scrolled < firstSection.offsetTop - 200) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                if (navLinks[0]) navLinks[0].classList.add('active'); // Activate first nav item
+            }
+        });
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key >= '1' && e.key <= '8') {
+                const cards = document.querySelectorAll('.card-hover');
+                const index = parseInt(e.key) - 1;
+                if (cards[index]) {
+                    cards[index].click();
+                }
+            }
+        });
+
+        // Add visual feedback for card interactions
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.borderColor = 'rgba(255, 111, 0, 0.3)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+            });
+        });
+    </script>
+</body>
+</html>
