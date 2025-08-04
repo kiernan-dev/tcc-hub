@@ -360,7 +360,7 @@
                     <div class="w-1 h-8 bg-gradient-to-b from-orange-500 to-orange-600 rounded-full mr-4"></div>
                     <h3 class="text-2xl font-bold text-gray-800 uppercase tracking-wide">Static HTML Design Concepts</h3>
                 </div>
-                <div id="static-sites-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div id="static-sites-container" class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- Cards will be populated by JavaScript -->
                 </div>
             </div>
@@ -388,6 +388,19 @@
                     <h2 class="text-4xl font-bold text-gray-900 uppercase tracking-wider">Videos</h2>
                 </div>
                 <p class="text-gray-600 text-xl leading-relaxed px-8">Commercial footage, build timelapses, and behind-the-scenes content from Turkey Creek Cycles.</p>
+                
+                <!-- AI Video Disclaimer -->
+                <div class="mx-8 mb-2 bg-red-100 border border-red-800 rounded-lg p-4">
+                    <div class="flex items-start">
+                        <i class="fas fa-info-circle text-amber-500 mt-1 mr-3 flex-shrink-0"></i>
+                        <div>
+                            <h4 class="font-semibold text-amber-800 mb-2">AI-Generated Proof of Concept Videos</h4>
+                            <p class="text-sm text-amber-700 leading-relaxed">
+                                The featured video content represents quick AI-generated demonstrations showcasing creative possibilities. These are <strong>not production-ready</strong> materials but rather "proof-of-concept" clips created to illustrate what's achievable with modern AI tools. Professional video production would involve significantly more time, planning, and resources to deliver polished, broadcast-quality results.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
             
             <!-- Videos Grid -->
@@ -479,19 +492,19 @@
                 reactAppsContainer.innerHTML = 
                     createCard({
                         title: 'React App - Forged',
-                        description: 'Industrial-themed showcase featuring dynamic video background and rugged design aesthetics.',
+                        description: 'Dark, industrial powerhouse with sophisticated gradient aesthetics and premium video integration.',
                         icon: 'fas fa-code',
-                        tags: ['Industrial', 'Background Video', 'Dynamic'],
+                        tags: ['Industrial', 'Premium', 'Video-Driven', 'Bold'],
                         onClick: "openPage('https://kiernan-dev.github.io/tcc-react-forged/')",
                         extraClasses: 'opacity-50 cursor-not-allowed',
                         animationDelay: '1'
                     }) +
                     createCard({
                         title: 'React App - Legend',
-                        description: 'Clean, professional interface with interactive chatbot experience and streamlined user engagement.',
+                        description: 'Bold performance showcase with dynamic orange branding and prominent calls-to-action for custom builds.',
                         icon: 'fas fa-react',
                         iconStyle: 'color: #61dafb;',
-                        tags: ['Professional', 'Chatbot', 'Clean UI'],
+                        tags: ['Performance', 'AI-Powered-Chatbot', 'Premium', 'Interactive'],
                         onClick: "openPage('https://kiernan-dev.github.io/tcc-react-legend/')",
                         extraClasses: 'opacity-50 cursor-not-allowed',
                         animationDelay: '2'
@@ -504,25 +517,25 @@
                 staticSitesContainer.innerHTML = 
                     createCard({
                         title: 'California Brutalist',
-                        description: 'Bold, architectural design with strong geometric elements and modern typography.',
+                        description: 'Clean, legend-focused design with bold typography and inspirational messaging over striking motorcycle imagery.',
                         icon: 'fas fa-building',
-                        tags: ['Modern', 'Bold', 'E-commerce', 'Blog'],
+                        tags: ['Inspirational', 'Typography-Heavy', 'Clean', 'Showcase'],
                         onClick: "openPage('tcc-cali-brutalist.html')",
                         animationDelay: '1'
                     }) +
                     createCard({
                         title: 'Impactful',
-                        description: 'High-impact design with strong visual hierarchy and dynamic layouts.',
+                        description: 'High-contrast orange and black layout with prominent branding and direct customer engagement focus.',
                         icon: 'fas fa-bolt',
-                        tags: ['Dynamic', 'Powerful'],
+                        tags: ['High-Contrast', 'Brand-Focused', 'Engagement', 'Bold'],
                         onClick: "openPage('tcc-impactful.html')",
                         animationDelay: '4'
                     }) +
                     createCard({
                         title: 'Rev Master',
-                        description: 'Performance-oriented design with racing aesthetics and speed elements.',
+                        description: 'Premium rugged design showcasing featured inventory and comprehensive service offerings with dark, professional aesthetics.',
                         icon: 'fas fa-tachometer-alt',
-                        tags: ['Performance', 'Racing'],
+                        tags: ['Premium', 'Service-Focused', 'Inventory', 'Professional'],
                         onClick: "openPage('tcc-rev-master.html')",
                         animationDelay: '6'
                     });
@@ -534,17 +547,17 @@
                 specialPagesContainer.innerHTML = 
                     createCard({
                         title: 'Swag Shop',
-                        description: 'E-commerce focused design showcasing merchandise and branded products.',
+                        description: 'Clean, retail-focused e-commerce platform with streamlined product categories and customer-friendly shopping experience.',
                         icon: 'fas fa-shopping-bag',
-                        tags: ['E-commerce', 'Retail'],
+                        tags: ['E-commerce', 'Retail', 'User-Friendly', 'Product-Focused'],
                         onClick: "openPage('tcc-swag-shop.html')",
                         animationDelay: '7'
                     }) +
                     createCard({
                         title: 'V-Twin Blog',
-                        description: 'Content-focused design for sharing stories, builds, and motorcycle culture.',
+                        description: 'Industrial storytelling platform with rich imagery and content-driven design highlighting craftsmanship and motorcycle culture.',
                         icon: 'fas fa-blog',
-                        tags: ['Content', 'Stories'],
+                        tags: ['Content-Rich', 'Storytelling', 'Culture-Focused', 'Craftsmanship'],
                         onClick: "openPage('tcc-vtwin-blog.html')",
                         animationDelay: '8'
                     });
@@ -587,11 +600,11 @@
                         '<h3 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">' +
                             '<i class="fas fa-laugh text-orange-500 mr-3"></i>Blooper Reels' +
                         '</h3>' +
-                        '<p class="text-gray-600 mb-6">Behind-the-scenes bloopers and outtakes from our video shoots - the fun stuff that didn\'t make the final cut!</p>' +
+                        '<p class="text-gray-600 mb-6">These aren\'t your typical blooper reels - they showcase what happens when AI video generation goes awry. Sometimes amusing, always entertaining, these clips demonstrate the quirky side of AI creativity and the unexpected results that can emerge from the creative process.</p>' +
                     '</div>' +
                     createCard({
                         title: 'Gflow TCC Clip',
-                        description: 'Outtakes and funny moments from our GFlow TCC video shoot.',
+                        description: 'AI-generated video experiment showcasing unexpected results.',
                         icon: 'fas fa-laugh-squint',
                         tags: ['Bloopers', 'Behind-the-Scenes'],
                         onClick: "openVideoModal('vids/bloopers/Gflow_tcc_clip_4.mp4', 'Gflow TCC Clip - Bloopers')",
@@ -599,7 +612,7 @@
                     }) +
                     createCard({
                         title: 'Timelapse Bloopers #1',
-                        description: 'Funny moments and mistakes from our chassis timelapse filming.',
+                        description: 'First collection of amusing AI video generation attempts and creative mishaps - Not quite sure what he was working on here.',
                         icon: 'fas fa-laugh-squint',
                         tags: ['Bloopers', 'Timelapse'],
                         onClick: "openVideoModal('vids/bloopers/chasis-timelapse-3.mp4', 'Timelapse Bloopers #1')",
@@ -607,7 +620,7 @@
                     }) +
                     createCard({
                         title: 'Timelapse Bloopers #2',
-                        description: 'More hilarious outtakes from our build timelapse sessions.',
+                        description: 'Second AI-generated video experiment showcasing unexpected outcomes - This one featured a head-turning finish.',
                         icon: 'fas fa-laugh-squint',
                         tags: ['Bloopers', 'Timelapse'],
                         onClick: "openVideoModal('vids/bloopers/chasis-timelapse-4.mp4', 'Timelapse Bloopers #2')",
@@ -615,7 +628,7 @@
                     }) +
                     createCard({
                         title: 'Workshop Bloopers #1',
-                        description: 'Candid moments and funny mishaps from around the shop.',
+                        description: 'AI-generated welding mishaps - when sparks don\'t fly quite right.',
                         icon: 'fas fa-laugh-squint',
                         tags: ['Bloopers', 'Workshop'],
                         onClick: "openVideoModal('vids/bloopers/video-1749337164638.mp4', 'Workshop Bloopers #1')",
@@ -623,7 +636,7 @@
                     }) +
                     createCard({
                         title: 'Workshop Bloopers #2',
-                        description: 'More entertaining moments from our daily shop operations.',
+                        description: 'More welding gone wrong - the AI gets creative with metal and mayhem.',
                         icon: 'fas fa-laugh-squint',
                         tags: ['Bloopers', 'Workshop'],
                         onClick: "openVideoModal('vids/bloopers/video-1749337189859.mp4', 'Workshop Bloopers #2')",
@@ -631,7 +644,7 @@
                     }) +
                     createCard({
                         title: 'Workshop Bloopers #3',
-                        description: 'Even more laughs and unscripted moments from the Turkey Creek team.',
+                        description: 'Welding disasters escalate - things get increasingly chaotic in the shop.',
                         icon: 'fas fa-laugh-squint',
                         tags: ['Bloopers', 'Workshop'],
                         onClick: "openVideoModal('vids/bloopers/video-1749337196982.mp4', 'Workshop Bloopers #3')",
@@ -639,7 +652,7 @@
                     }) +
                     createCard({
                         title: 'Workshop Bloopers #4',
-                        description: 'The final collection of our funniest workshop moments and outtakes.',
+                        description: 'Fourth of July is over - nobody told the AI welder.',
                         icon: 'fas fa-laugh-squint',
                         tags: ['Bloopers', 'Workshop'],
                         onClick: "openVideoModal('vids/bloopers/video-1749337199206.mp4', 'Workshop Bloopers #4')",
